@@ -1,0 +1,37 @@
+
+    {% extends "base.html" %}
+    {% block main %}
+	<section id="layout-content">
+		<div id="hero">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col">
+						<h1>Welcome To Filtr</h1>
+						<p>Found something cool? Join us and share it with our community.
+						<br>If you've already joined, login to add more.</p>
+						<a class="btn btn-primary text-center" href="/register">Register</a> 
+						<a class="btn btn-primary text-center" href="/login">Login</a>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+    <div id="others-images-home" class="container-fluid">
+		<div class="row">
+			<div class="col">
+				<h2>Latest Images</h2>
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for message in messages %}
+					<p>
+						<div class="alert alert-dark" role="alert">
+							{{ message }}
+						</div>
+					</p>
+					{% endfor %}
+				{% endif %}
+				{% endwith %}
+			</div>
+		</div>
+    </div>
+    {% endblock %}

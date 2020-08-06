@@ -1,0 +1,43 @@
+/* Hero */
+#hero{
+    background:  url(../img/hero.jpg) no-repeat center center fixed; 
+    height: calc(100vh - 68px);
+    width: 100%;
+    display: block;
+    position: relative;
+    @include background-size(cover);
+    .container-fluid{
+        .row{
+            padding: 120px;
+            img{
+                display: block;
+            }
+            h1{
+                margin-bottom: 15px;
+                text-transform: uppercase;
+                width: 100%;
+                color: $dark_grey;
+            }
+            p {
+                margin-bottom: 0;
+                font-weight: 700;
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+                color: $dark_grey;
+            }
+            .btn.btn-primary{
+                background: $dark_grey;
+                border: none;
+                color: #fff;
+                margin-right: 1rem;
+                margin-top: 1rem;
+                &:hover{
+                    background: #fff;
+                    color: $dark_grey;
+                    border: none;
+                }
+            }
+        }
+    }
+}

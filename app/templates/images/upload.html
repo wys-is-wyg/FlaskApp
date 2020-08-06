@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block main %}
+<section id="layout-content">
+	<div id="upload" class="text-center">
+		<div class="container-fluid">
+			<div class="row">
+				<form class="form-upload" method="POST" action="" enctype=multipart/form-data>
+					<h1 class="mb-3 font-weight-normal">File Upload</h1>
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+						{% for message in messages %}
+						<p>
+							<div class="alert alert-dark" role="alert">
+							{{ message }}
+							</div>
+						</p>
+						{% endfor %}
+						{% endif %}
+					{% endwith %}
+					<div class="custom-file">
+						<input type="file" name="file" class="custom-file-input" id="fileUpload">
+						<label class="custom-file-label" for="fileUpload">Choose file</label>
+					</div>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

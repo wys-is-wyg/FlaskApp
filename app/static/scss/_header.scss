@@ -1,0 +1,21 @@
+.navbar-brand {
+    font-size: 2.5rem;
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 15px 30px;
+}
+.dropdown-item{
+    color: #fff;
+    transition: background-color $transition;
+    &:hover{
+        background: #fff;
+        color: $dark_grey;
+    }
+}
+#navbar i {
+    margin-right: 10px;
+}
+li.nav-item{
+    margin-right: 15px;
+}

@@ -1,0 +1,31 @@
+body{
+    background: $dark_grey;
+}
+
+.bg-dark {
+    background-color: $dark_grey !important;
+}
+
+.btn.btn-primary{
+    background: $dark_grey;
+    border: 1px solid $light_grey;
+    color: #fff;
+    transition: background-color $transition;
+    padding: 15px 30px;
+    border-radius: 0;
+    &:hover{
+        background: #fff;
+        color: $dark_grey;
+        border: 1px solid #fff;
+    }
+}
+
+.alert {
+    border-radius: 0;
+}
+
+ul.flashes{
+    list-style-type: none;
+    margin: 1rem 0;
+    padding: 0;
+}

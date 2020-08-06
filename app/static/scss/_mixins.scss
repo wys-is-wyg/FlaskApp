@@ -1,0 +1,41 @@
+@mixin vendor-prefix($prefix, $value) {
+    -webkit-#{$prefix}: $value;
+       -moz-#{$prefix}: $value;  
+         -o-#{$prefix}: $value;      
+            #{$prefix}: $value;
+}
+
+@mixin background-size($size) {
+    @include vendor-prefix('background-size', $size);
+}
+
+@mixin border-radius($radius) {
+    @include vendor-prefix('border-radius', $radius);
+}
+
+@mixin transition($transition) {
+    @include vendor-prefix('transition', $transition);
+}
+
+@mixin animation($animation) {
+    @include vendor-prefix('animation', $animation);
+}
+
+@mixin filter($filter) {
+    @include vendor-prefix('filter', $filter);
+}
+
+@mixin box-shadow($box-shadow) {
+    @include vendor-prefix('box-shadow', $box-shadow);
+}
+
+@mixin transition($transition...) {
+    @if length($transition) == 0 {
+    transition: $transition-base;
+    } @else {
+    transition: $transition;
+    }
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
