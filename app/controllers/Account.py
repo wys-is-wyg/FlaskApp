@@ -1,15 +1,16 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, session
+from flask import current_app as flask_app
 from app.models.Account import Account
 
 bp = Blueprint('account', __name__, url_prefix='', static_folder='../static')
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
-    account = Account()
     
     if request.method == 'POST':
         error = None
         try:
+            account = Account()
             user = account.register(request)
         except Exception as err:
             error = err
@@ -23,11 +24,11 @@ def register():
     
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
-    account = Account()
     
     if request.method == 'POST':
         error = None
         try:
+            account = Account()
             user = account.login(request)
         except Exception as err:
             error = err
@@ -41,27 +42,16 @@ def login():
     
 @bp.route('/profile', methods=('GET', 'POST'))
 def profile():
-    account = Account()
 
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-
         error = None
-        if not email:
-            error = 'An email is required.'
-        elif not password:
-            error = 'Password is required.'
-        else:
-            try:
-                database = Database()
-                user_auth = database.update_user(email, password)
-            except Exception as err:
-                error = err
+        try:
+            account = Account()
+            user = account.update(request)
+        except Exception as err:
+            error = err
         if error:
             flash(error)
-        else:
-            return redirect(url_for('index'))
 
     return render_template('account/profile.html')
     
