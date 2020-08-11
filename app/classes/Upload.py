@@ -11,8 +11,11 @@ class Upload():
     def upload(self, file, filename):
 
         allowed_extension = self.allowed_file(file.filename)
+        flask_app.logger.info(filename)
+        flask_app.logger.info(allowed_extension)
         if allowed_extension:
             fullname = filename + '.' + allowed_extension
+            flask_app.logger.info(fullname)
             destination = os.path.join('static/uploads', fullname)
             file.save(os.path.join(SITE_ROOT, destination))
             return destination

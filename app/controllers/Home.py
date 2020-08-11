@@ -1,5 +1,6 @@
-from app.classes.Database import Database
-from flask import Blueprint, render_template, flash
+from app.models.Image import Image
+from flask import Blueprint, render_template, flash, session
+from flask import current_app as flask_app
 
 bp = Blueprint('home', __name__, url_prefix='', static_folder='../static')
 
@@ -10,11 +11,10 @@ def index():
     error = None
     latest_images = []
     try:
-        database = Database()
-        latest_images = database.get_latest_images()
+        image_model = Image()
+        latest_images = image_model.get_latest_images()
     except Exception as err:
         error = err
-
     if error:
         flash(error)
 

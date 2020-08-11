@@ -31,8 +31,8 @@ def router(app):
 
     from app.controllers import Home
     from app.controllers import Account
-    # from app.views import Images
+    from app.controllers import Images
 
     app.register_blueprint(Home.bp)
     app.register_blueprint(Account.bp)
-    # app.register_blueprint(images.bp)
+    app.register_blueprint(Images.bp)

@@ -1,20 +1,31 @@
-from app.classes.Database import Database
-from flask import Blueprint, render_template, request, flash
-from werkzeug.utils import secure_filename
+from app.models.Image import Image
+from flask import Blueprint, render_template, request, flash, session
+from flask import current_app as flask_app
 
 bp = Blueprint('images', __name__, url_prefix='/images', static_folder='../static')
-
-# Load the index page
-@bp.route('/')
-def images():
-    return render_template('images/images.html')
-
-    
+   
 # Load the index page
 @bp.route('/upload', methods=('GET', 'POST'))
 def upload():
     
     if request.method == 'POST':
+        error = None
+        try:
+            image_model = Image()
+            latest_images = image_model.upload(request)
+            flash("Your Image has been uploaded")
+        except Exception as err:
+            error = err
+        if error:
+            flash(error)
+
+    return render_template('images/upload.html')
+    
+    
+@bp.route('/category')
+def category():
+    
+    if request.method == 'GET':
         error = None
         # check if the post request has the file part
         if 'file' not in request.files:
