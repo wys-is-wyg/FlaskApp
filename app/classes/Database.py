@@ -7,15 +7,29 @@ from flask import current_app as flask_app
 from app import SITE_ROOT
 
 class Database():
+    """ 
+    Database Class. 
+  
+    Class to interact with Firebase Realtime Database. 
+  
+    """
 
     def __init__(self):
+        """ 
+        Initialise class with configuration 
+    
+        """
+        # Load Firebase config data, including Service Account file
         firebase_config_file = os.path.join(SITE_ROOT, 'firebase.json')
         firebase_config = json.load(open(firebase_config_file))
         firebase_config["serviceAccount"] = os.path.join(SITE_ROOT, 'firebase.admin.json')
         
+        # Initialize Firebase auth and database
         self.firebase = pyrebase.initialize_app(firebase_config)
         self.auth = self.firebase.auth()
         self.db = self.firebase.database()
+
+        # Create readable errors based on Firebase errors
         self.readable_errors = {
             "INVALID_PASSWORD": "This is an invalid password",
             "EMAIL_NOT_FOUND": "This email has not been registered",
@@ -24,17 +38,11 @@ class Database():
             "USER_DISABLED": "This account has been disabled by an administrator.",
         }
         
-    def register(self, email, password):
+    def register(self, user_data, password):
         try:
-            user_auth = self.auth.create_user_with_email_and_password(email, password)
-            data = {
-                "localId": user_auth['localId'],
-                "email": email,
-                "first_name": "",
-                "last_name": "",
-                "avatar": ""
-            }
-            self.db.child("users").child(user_auth['localId']).set(data)
+            user_auth = self.auth.create_user_with_email_and_password(user_data['email'], password)
+            user_data['localId'] = user_auth['localId']
+            self.db.child("users").child(user_auth['localId']).set(user_data)
             return user_auth
         except requests.exceptions.HTTPError as error:
             flask_app.logger.info(error)

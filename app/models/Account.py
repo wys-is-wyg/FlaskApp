@@ -42,9 +42,16 @@ class Account():
             error = 'Password and password confirmation should match.'
         else:
             try:
+                user_data = {
+                    "localId": "",
+                    "email": email,
+                    "first_name": "",
+                    "last_name": "",
+                    "avatar": ""
+                }
                 # Attempt to process valid registration request
                 database = Database()
-                user_auth = database.register(email, password)
+                user_auth = database.register(user_data, password)
             except Exception as err:
                 # Raise error from failed Firebase request
                 error = err
