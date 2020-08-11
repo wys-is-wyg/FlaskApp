@@ -10,10 +10,25 @@ class Account():
         self.user = User()
 
     def register(self, request):
+        """ 
+        Registration method. 
+    
+        Processes POST request, and registers user in Firebase on success
+
+        Parameters: 
+            request (obj): The POST request object
+    
+        Raises: 
+            error (Exception): Error from failed Firebase request
+    
+        """
+
+        # Extract required fields from POST request
         email = request.form['email']
         password = request.form['password']
         password_confirm = request.form['password_confirm']
 
+        # Validates required registration fields
         error = None
         if not email:
             error = 'An email is required.'
@@ -27,14 +42,17 @@ class Account():
             error = 'Password and password confirmation should match.'
         else:
             try:
+                # Attempt to process valid registration request
                 database = Database()
                 user_auth = database.register(email, password)
             except Exception as err:
+                # Raise error from failed Firebase request
                 error = err
-
         if error:
+            # Raise error from failed Firebase request
             raise Exception(error)
         else:
+            # Return on success
             return
         
     def login(self, request):
@@ -73,11 +91,13 @@ class Account():
             elif not last_name:
                 error = 'A last name is required.'
             else:
-                if 'file' in request.files:
-                    file = request.files['file']
-                    uploader = Upload()
-                    avatar = uploader.upload(file, session['user']['localId'])
-                    flask_app.logger.info(avatar)
+                if 'avatar' in request.files:
+                    file = request.files['avatar']
+                    if file.filename:
+                        flask_app.logger.info(file)
+                        uploader = Upload()
+                        avatar = uploader.upload(file, session['user']['localId'])
+                        session['user']['avatar'] = avatar
                 try:
                     session['user']['first_name'] = first_name
                     session['user']['last_name'] = last_name
@@ -87,8 +107,6 @@ class Account():
                     error = err
             if error:
                 flash(error)
-
-        return render_template('account/profile.html')
         
     def logout(self):
         self.user.unset_user()

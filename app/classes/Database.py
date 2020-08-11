@@ -4,14 +4,14 @@ import pyrebase
 import requests
 import json
 from flask import current_app as flask_app
-from app import ARA_SITE_ROOT
+from app import SITE_ROOT
 
 class Database():
 
     def __init__(self):
-        firebase_config_file = os.path.join(ARA_SITE_ROOT, 'firebase.json')
+        firebase_config_file = os.path.join(SITE_ROOT, 'firebase.json')
         firebase_config = json.load(open(firebase_config_file))
-        firebase_config["serviceAccount"] = os.path.join(ARA_SITE_ROOT, 'firebase.admin.json')
+        firebase_config["serviceAccount"] = os.path.join(SITE_ROOT, 'firebase.admin.json')
         
         self.firebase = pyrebase.initialize_app(firebase_config)
         self.auth = self.firebase.auth()

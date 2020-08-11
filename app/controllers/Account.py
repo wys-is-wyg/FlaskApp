@@ -6,17 +6,29 @@ bp = Blueprint('account', __name__, url_prefix='', static_folder='../static')
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
-    
+    """ 
+    Registration controller. 
+  
+    Presents the registration view and handles registration requests. 
+  
+    Returns: 
+    obj: Either render_template or redirect
+  
+    """
+
     if request.method == 'POST':
         error = None
         try:
+            # Get account singleton and try register user
             account = Account()
             user = account.register(request)
         except Exception as err:
+            # Registration error to be flashed
             error = err
         if error:
             flash(error)
         else:
+            # Registration successful so redirect
             flash("Please login to get started!")
             return redirect(url_for('account.login'))
 
@@ -48,6 +60,7 @@ def profile():
         try:
             account = Account()
             user = account.update(request)
+            flash("Your details have been updated")
         except Exception as err:
             error = err
         if error:

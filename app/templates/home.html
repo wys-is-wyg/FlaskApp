@@ -9,8 +9,10 @@
 						<h1>Welcome To Filtr</h1>
 						<p>Found something cool? Join us and share it with our community.
 						<br>If you've already joined, login to add more.</p>
+						{% if not user.logged_in %}
 						<a class="btn btn-primary text-center" href="/register">Register</a> 
 						<a class="btn btn-primary text-center" href="/login">Login</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>

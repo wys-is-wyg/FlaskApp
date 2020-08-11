@@ -7,12 +7,11 @@
 				<div class="row">
 					<form class="form-profile" method="POST" action="/profile" enctype="multipart/form-data">
 						<h1 class="mb-3 font-weight-normal">Your Profile</h1>
-						<h3 class="mb-2 font-weight-normal">Update Your Profile</h3>
 						{% with messages = get_flashed_messages() %}
 							{% if messages %}
-							{% for message in messages %}
-							<p>{{ message }}</p>
-							{% endfor %}
+								{% for message in messages %}
+								<p>{{ message }}</p>
+								{% endfor %}
 							{% endif %}
 						{% endwith %}
 						<label for="inputFirstName" class="sr-only">First Name</label>
@@ -20,10 +19,8 @@
 						<label for="inputLastName" class="sr-only">Last Name</label>
 						<input type="text" id="inputLastName" name="lastname" class="form-control" placeholder="Last Name" required="required" value="{{ session['user']['last_name'] }}">
 						{% if session['user']['avatar'] %}
-						<div id="avatar" class="col-md-3 col-6 p-0">
-							<div class="avatar-window">
-								<img src="{{ session['user']['avatar'] }}" alt="Your Profile Image">
-							</div>
+						<div id="avatar">
+							<img src="{{ session['user']['avatar'] }}" alt="Your Profile Image">
 						</div>
 						{% endif %}
 						<div class="form-group">
@@ -35,17 +32,6 @@
 							</div>
 						</div>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
-					</form>
-				</div>
-				<div class="row">
-					<form class="form-profile" method="POST" action="/password" >
-						<h3 class="mb-2 font-weight-normal">Update Your Password/Email</h3>
-						<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="required">
-						<label for="inputPasswordConfirm" class="sr-only">Password</label>
-						<input type="password" id="inputPasswordConfirm" name="password_confirm" class="form-control" placeholder="Password Confirm" required="required">
-						<label for="inputEmail" class="sr-only">Email address</label>
-						<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required="required" value="{{ session['user']['email'] }}">
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Change Your Password/Email</button>
 					</form>
 				</div>
 			</div>
