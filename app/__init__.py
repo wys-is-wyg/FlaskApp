@@ -8,6 +8,7 @@ def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
     app.secret_key = 'SECRET_KEY'
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
     @app.before_request
     def before_request_func():
@@ -22,6 +23,12 @@ def create_app(test_config=None):
             "user_data": session['user']
         }
         return dict(user=user)
+
+    @app.after_request
+    def after_request_func(response):
+        app.logger.info('#######################################')
+        app.logger.info(session)
+        return response
 
     router(app)
     return app

@@ -3,7 +3,7 @@ from app.classes.Upload import Upload
 from app.models.User import User
 from flask import session
 from flask import current_app as flask_app
-import uuid
+import uuid, time
 
 class Image():
 
@@ -72,7 +72,8 @@ class Image():
                         "name": name,
                         "description": description,
                         "tags": tags,
-                        "filter": image_filter
+                        "filter": image_filter,
+                        "created_at": time.time()
                     }
                     database = Database()
                     uploaded = database.save_image(image_data, image_id)

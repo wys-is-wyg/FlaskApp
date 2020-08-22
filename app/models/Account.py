@@ -7,6 +7,7 @@ from flask import current_app as flask_app
 class Account():
 
     def __init__(self):
+        self.user = User()
         return None
 
     def register(self, request):
@@ -112,7 +113,7 @@ class Account():
                 except Exception as err:
                     error = err
             if error:
-                flash(error)
+                flash(str(error))
         
     def logout(self):
         self.user.unset_user()

@@ -16,7 +16,7 @@ def index():
     except Exception as err:
         error = err
     if error:
-        flash(error)
+        flash(str(error))
 
     return render_template('home.html', latest_images=latest_images)
 

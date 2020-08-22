@@ -17,7 +17,7 @@ def upload():
         except Exception as err:
             error = err
         if error:
-            flash(error)
+            flash(str(error))
 
     return render_template('images/upload.html')
     
@@ -44,7 +44,7 @@ def category():
                     error = err
 
         if error:
-            flash(error)
+            flash(str(error))
         else:
             flash("Your file has been uploaded!")
 
