@@ -13,13 +13,14 @@ class Image():
     def get_latest_images(self):
         
         error = None
-        latest_images = []
+        latest_images = False
         user_id = False
         if (session['user'] and session['user']['localId']):
             user_id = session['user']['localId']
         try:
             database = Database()
             latest_images = database.get_latest_images(user_id)
+
         except Exception as err:
             flask_app.logger.info(err)
             error = err

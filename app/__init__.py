@@ -1,5 +1,5 @@
 import os
-from flask import Flask, session
+from flask import Flask, session, render_template
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 UPLOAD_FOLDER = 'static/uploads'
@@ -29,6 +29,11 @@ def create_app(test_config=None):
         app.logger.info('#######################################')
         app.logger.info(session)
         return response
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        # note that we set the 404 status explicitly
+        return render_template('404.html'), 404
 
     router(app)
     return app

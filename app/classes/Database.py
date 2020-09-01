@@ -45,8 +45,13 @@ class Database():
                 images = self.db.child("images").order_by_child("user_id").equal_to(user_id).limit_to_first(20).get()
             else:
                 images = self.db.child("images").order_by_child("created_at").limit_to_first(20).get()
+
+            if images is None:
+                return False
+
             flask_app.logger.info(images)
             return images
+            
         except Exception as err:
             self.process_error(err)
         
