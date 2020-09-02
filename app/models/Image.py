@@ -10,16 +10,14 @@ class Image():
     def __init__(self):
         return None
 
-    def get_latest_images(self):
+    def get_images(self, limit=20):
         
         error = None
-        latest_images = False
-        user_id = False
-        if (session['user'] and session['user']['localId']):
-            user_id = session['user']['localId']
+        images = False
+        
         try:
             database = Database()
-            latest_images = database.get_latest_images(user_id)
+            images = database.get_images(limit)
 
         except Exception as err:
             flask_app.logger.info(err)
@@ -28,7 +26,27 @@ class Image():
         if error:
             raise Exception(error)
         else:
-            return latest_images
+            return images
+
+    def get_user_images(self, limit=20):
+        
+        error = None
+        images = False
+        user_id = False
+        if (session['user'] and session['user']['localId']):
+            user_id = session['user']['localId']
+        try:
+            database = Database()
+            images = database.get_images(limit, user_id)
+
+        except Exception as err:
+            flask_app.logger.info(err)
+            error = err
+
+        if error:
+            raise Exception(error)
+        else:
+            return images
 
     def upload(self, request):
         

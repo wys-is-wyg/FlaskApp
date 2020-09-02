@@ -33,12 +33,12 @@
 					{% endfor %}
 				{% endif %}
 				{% endwith %}
-				{% if latest_images %}
+				{% if images %}
 					<div class="grid">
-					{% for latest_image_object in latest_images.each() %}
-						{% with latest_image = latest_image_object.val() %}
+					{% for image_object in images.each() %}
+						{% with image = image_object.val() %}
 						<div class="grid-item">
-							<img src="{{ latest_image.upload_location }}" alt="{{ latest_image.description }}">
+							<img src="{{ image.upload_location }}" alt="{{ image.description }}">
 						</div>
 						{% endwith %}
 					{% endfor %}

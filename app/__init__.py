@@ -26,8 +26,10 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request_func(response):
-        app.logger.info('#######################################')
+        app.logger.info('################SESSIONINFO#######################')
         app.logger.info(session)
+        #OPTIONAL - enable to clear flash
+        #session.pop('_flashes', None)
         return response
 
     @app.errorhandler(404)

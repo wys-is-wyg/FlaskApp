@@ -5,6 +5,7 @@ import requests
 import json
 from flask import current_app as flask_app
 from app import SITE_ROOT
+from collections.abc import Iterable 
 
 class Database():
     """ 
@@ -37,20 +38,21 @@ class Database():
             "TOO_MANY_ATTEMPTS_TRY_LATER": "Too many attempts, please try again later",
             "USER_DISABLED": "This account has been disabled by an administrator.",
         }
-        
+
     # Image Requests
-    def get_latest_images(self, user_id):
+    def get_images(self, limit=20, user_id=False):
         try:
             if (user_id):
-                images = self.db.child("images").order_by_child("user_id").equal_to(user_id).limit_to_first(20).get()
+                images = self.db.child("images").order_by_child("user_id").equal_to(user_id).limit_to_first(limit).get()
             else:
-                images = self.db.child("images").order_by_child("created_at").limit_to_first(20).get()
+                images = self.db.child("images").order_by_child("created_at").limit_to_first(limit).get()
 
-            if images is None:
-                return False
-
+            flask_app.logger.info('####################### images #####################')
             flask_app.logger.info(images)
-            return images
+            if isinstance(images, Iterable):
+                return images
+            else:
+                return False
             
         except Exception as err:
             self.process_error(err)

@@ -9,16 +9,16 @@ bp = Blueprint('home', __name__, url_prefix='', static_folder='../static')
 def index():
 
     error = None
-    latest_images = []
+    images = []
     try:
         image_model = Image()
-        latest_images = image_model.get_latest_images()
+        images = image_model.get_images()
     except Exception as err:
         error = err
     if error:
         flash(str(error))
 
-    return render_template('home.html', latest_images=latest_images)
+    return render_template('home.html', images=images)
 
 @bp.errorhandler(404)
 def error404(e):

@@ -60,6 +60,10 @@ ul.flashes {
   padding: 0;
 }
 
+h2 {
+  margin: 30px;
+}
+
 .form-profile,
 .form-upload,
 .form-signin {
@@ -190,10 +194,6 @@ li.nav-item {
   background: #fff;
   color: #151515;
   border: none;
-}
-
-#others-images-home h2 {
-  margin: 30px;
 }
 
 #my-images,
