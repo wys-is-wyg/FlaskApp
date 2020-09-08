@@ -16,9 +16,10 @@ def create_app(test_config=None):
         if not session.get('logged_in'):
             session['logged_in'] = False
             session['user'] = None
-            if 'static' not in request.endpoint:
-                if request.endpoint not in open_routes:
-                    return redirect('/')
+            if (request.endpoint and
+                'static' not in request.endpoint and 
+                request.endpoint not in open_routes):
+                return redirect('/')
 
     @app.context_processor
     def inject_user():
@@ -30,7 +31,7 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request_func(response):
-        if 'static' not in request.endpoint:
+        if request.endpoint and 'static' not in request.endpoint:
             app.logger.info('################ SESSIONINFO #######################')
             app.logger.info(session)
             #OPTIONAL - enable to clear flash

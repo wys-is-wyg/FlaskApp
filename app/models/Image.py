@@ -100,6 +100,8 @@ class Image():
                 except Exception as err:
                     error = err
         if error:
+            app.logger.info('################ UPLOAD ERROR #######################')
+            flask_app.logger.info(error)
             raise Exception(error)
         else:
             return
