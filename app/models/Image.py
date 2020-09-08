@@ -90,6 +90,7 @@ class Image():
                         "user_id": user_id,
                         "name": name,
                         "description": description,
+                        "category": category,
                         "tags": tags,
                         "filter": image_filter,
                         "created_at": time.time()

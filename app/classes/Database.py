@@ -3,9 +3,9 @@ import tempfile
 import pyrebase
 import requests
 import json
+from collections import OrderedDict
 from flask import current_app as flask_app
 from app import SITE_ROOT
-from collections.abc import Iterable 
 
 class Database():
     """ 
@@ -47,9 +47,9 @@ class Database():
             else:
                 images = self.db.child("images").order_by_child("created_at").limit_to_first(limit).get()
 
-            flask_app.logger.info('####################### images #####################')
-            flask_app.logger.info(images)
-            if isinstance(images, Iterable):
+            flask_app.logger.info('####################### images val #####################')
+            flask_app.logger.info(images.val())
+            if isinstance(images.val(), OrderedDict):
                 return images
             else:
                 return False

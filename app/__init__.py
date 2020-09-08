@@ -1,5 +1,5 @@
 import os
-from flask import Flask, session, render_template
+from flask import Flask, session, render_template, request, redirect
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 UPLOAD_FOLDER = 'static/uploads'
@@ -12,9 +12,13 @@ def create_app(test_config=None):
 
     @app.before_request
     def before_request_func():
+        open_routes = ['home.index', 'account.login', 'account.register']
         if not session.get('logged_in'):
             session['logged_in'] = False
             session['user'] = None
+            if 'static' not in request.endpoint:
+                if request.endpoint not in open_routes:
+                    return redirect('/')
 
     @app.context_processor
     def inject_user():
@@ -26,10 +30,11 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request_func(response):
-        app.logger.info('################SESSIONINFO#######################')
-        app.logger.info(session)
-        #OPTIONAL - enable to clear flash
-        #session.pop('_flashes', None)
+        if 'static' not in request.endpoint:
+            app.logger.info('################ SESSIONINFO #######################')
+            app.logger.info(session)
+            #OPTIONAL - enable to clear flash
+            #session.pop('_flashes', None)
         return response
 
     @app.errorhandler(404)
