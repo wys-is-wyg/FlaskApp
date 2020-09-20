@@ -200,7 +200,6 @@ li.nav-item {
   width: calc(33vw - 30px);
   float: left;
   margin-bottom: 30px;
-  cursor: pointer;
 }
 
 .grid-item img {
@@ -208,9 +207,12 @@ li.nav-item {
   height: auto;
 }
 
+#image-modal.show {
+  display: block !important;
+}
+
 #image-modal .modal-dialog {
-  max-height: 75vh !important;
-  min-width: 40vw !important;
+  max-width: 75vw !important;
 }
 
 #image-modal .modal-dialog .modal-content {
@@ -226,37 +228,33 @@ li.nav-item {
 
 #image-modal .modal-dialog .modal-content .modal-body {
   padding: 0;
-  background-color: #000;
+  background-color: #fff;
 }
 
-#image-modal .modal-dialog .modal-content .modal-header {
-  border: none;
-  width: 100%;
-  text-align: center;
-}
-
-#image-modal .modal-dialog .modal-content img {
+#image-modal .modal-dialog .modal-content .modal-body img {
   width: 100%;
   height: auto;
 }
 
-#image-modal .modal-dialog .modal-content h5 {
+#image-modal .modal-dialog .modal-content .modal-body h5 {
   font-weight: 700;
-  margin: 15px 0;
-  padding: 0 15px;
-  width: 100%;
+  margin-top: 15px;
+  margin-left: 15px;
 }
 
-#image-modal .modal-dialog .modal-content p {
-  margin: 15px 0;
-  padding: 0 15px;
+#image-modal .modal-dialog .modal-content .modal-body p {
+  margin-top: 5px;
+  margin-left: 15px;
 }
 
-#image-modal .modal-dialog .modal-content i {
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: #fff;
-  float: right;
+#image-modal .modal-dialog .modal-content .modal-body .close {
+  position: absolute;
+  border-bottom: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  right: 15px;
+  bottom: 15px;
+  text-shadow: none;
 }
 
 #profile h1 {
