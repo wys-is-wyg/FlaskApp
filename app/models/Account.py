@@ -1,7 +1,7 @@
 from app.classes.Database import Database
 from app.classes.Upload import Upload
 from app.models.User import User
-from flask import session
+from flask import session, flash
 from flask import current_app as flask_app
 
 class Account():
@@ -104,7 +104,7 @@ class Account():
                     if file.filename:
                         uploader = Upload()
                         avatar = uploader.upload(file, session['user']['localId'])
-                        session['user']['avatar'] = avatar
+                        session['user']['avatar'] = "/" + avatar.strip("/")
                 try:
                     session['user']['first_name'] = first_name
                     session['user']['last_name'] = last_name
@@ -112,8 +112,11 @@ class Account():
                     user_auth = database.update_user(session['user'])
                 except Exception as err:
                     error = err
-            if error:
-                flash(str(error))
+
+        if error:
+            raise Exception(error)
+        else:
+            return
         
     def logout(self):
         self.user.unset_user()

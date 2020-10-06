@@ -224,6 +224,31 @@ li.nav-item {
   }
 }
 
+#images .info {
+  margin: 15px;
+}
+
+#images .info p {
+  margin-bottom: 0rem;
+}
+
+#images h5 a {
+  float: right;
+  display: inline;
+  color: #fff;
+  margin-left: 1rem;
+}
+
+#upload #image {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+#upload #image img {
+  width: 100%;
+  height: auto;
+}
+
 #image-modal .modal-dialog {
   max-height: 75vh !important;
   min-width: 40vw !important;
