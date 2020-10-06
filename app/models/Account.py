@@ -110,6 +110,7 @@ class Account():
                     session['user']['last_name'] = last_name
                     database = Database()
                     user_auth = database.update_user(session['user'])
+                    session.modified = True
                 except Exception as err:
                     error = err
 
@@ -117,6 +118,35 @@ class Account():
             raise Exception(error)
         else:
             return
+        
+    def like(self, image_id, like, request):
+                
+        changed = False
+
+        user = session['user']
+        like_key = 'likes'
+        likes = session['user'].get(like_key, [])
+
+        if like:
+            if image_id not in likes:
+                likes.append(image_id)
+
+                flask_app.logger.info('############user likes ')
+                flask_app.logger.info(likes)
+
+                changed = True
+        else:
+            if image_id in likes:
+                likes.remove(image_id)
+                changed = True
+
+        if changed:
+            session['user']['likes'] = likes
+            database = Database()
+            user_auth = database.update_user(session['user'])
+            session.modified = True
+
+        return changed
         
     def logout(self):
         self.user.unset_user()

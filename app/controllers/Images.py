@@ -1,5 +1,5 @@
 from app.models.Image import Image
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for, flash, session
 from flask import current_app as flask_app
 
 bp = Blueprint('images', __name__, url_prefix='/images', static_folder='../static')

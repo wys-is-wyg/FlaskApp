@@ -232,6 +232,10 @@ li.nav-item {
   margin-bottom: 0rem;
 }
 
+#images .info i.like {
+  z-index: 2;
+}
+
 #images h5 a {
   float: right;
   display: inline;
