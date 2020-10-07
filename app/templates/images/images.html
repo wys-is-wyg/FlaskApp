@@ -1,6 +1,5 @@
-
-    {% extends "base.html" %}
-    {% block main %}
+	{% extends "base.html" %}
+	{% block main %}
     <div id="images" class="container-fluid">
 		<div class="row">
 			<div class="col">
@@ -17,6 +16,9 @@
 				{% endif %}
 				{% endwith %}
 				{% if images %}
+				{% set liked_class = 'liked fas fa-heart' %}
+				{% set not_liked_class = 'not-liked far fa-heart' %}
+				{% set likes = session['user']['likes'] %}
 					<div class="grid">
 					{% for image_object in images.each() %}
 						{% with image = image_object.val() %}
@@ -29,7 +31,9 @@
 								<div class="col-10 pr-0">
 									<h5>
 										{{ image.name }} 
-										<a href="/images/like/{{ image.id }}"><i class="like not-liked far fa-heart" data-image="{{ image.id }}"></i></a>
+										<a href="/images/like/{{ image.id }}">
+											<i class="like {{ liked_class if image.id in likes else not_liked_class }}" data-image="{{ image.id }}"></i>
+										</a>
 									</h5>
 									<p>{{ image.description }}</p>
 									<small>{{ image.user_name }}</small>

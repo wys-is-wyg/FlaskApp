@@ -84,7 +84,7 @@ class Database():
         if error:
             raise Exception(error)
         else:
-            return image
+            return image.val()
 
     def save_image(self, image_data, image_id):
         try:

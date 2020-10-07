@@ -77,8 +77,11 @@ def logout():
 @bp.route('/like', methods=['GET'])
 def like():
 
-    image_id = request.args.get('image_id', '', type=str)
-    like = request.args.get('like', True, type=bool)
+    image_id = request.args.get('image_id')
+    like = request.args.get('like')
+    flask_app.logger.info('## LIKE VAL CT ##')
+    flask_app.logger.info(request.args.get('like'))
+    flask_app.logger.info(like)
     response = ''
 
     try:

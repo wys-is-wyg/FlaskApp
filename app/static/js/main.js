@@ -17,7 +17,10 @@ $(document).ready(function(){
 		$('.modal').modal('show');
 	});
 
-	$('i.like').bind('click', function() {
+	$('i.like').bind('click', function(e) {
+		
+		e.stopPropagation();
+		e.preventDefault();
 
 		var like 		= $(this).hasClass('not-liked');
 		var image_id 	= $(this).data('image');
@@ -27,8 +30,8 @@ $(document).ready(function(){
 			like: like,
 			image_id: image_id
 		}, function(result) {
-			console.log('line 29');
-			if (result == 'true') {
+			console.log(result);
+			if (result) {
 				if (like) {
 					_this.removeClass('far');
 					_this.removeClass('not-liked');

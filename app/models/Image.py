@@ -14,7 +14,7 @@ class Image():
         
         error = None
         images = False
-        
+
         try:
             database = Database()
             images = database.get_images(limit)
