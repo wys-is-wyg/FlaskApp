@@ -17,7 +17,11 @@
 						{% endfor %}
 						{% endif %}
 					{% endwith %}
-					<div id="image"><img src="{{ image.upload_location }}" alt="{{ image.description }}"></div>
+					<div id="image">
+						<figure class="filter-{{ image.filter }}">
+							<img src="{{ image.upload_location }}" alt="{{ image.description }}">
+						</figure>
+					</div>
 					<input type="hidden" name="image_id" value="{{ image.id }}"/>
 					<input type="hidden" name="upload_location" value="{{ image.upload_location }}"/>
 					<input type="hidden" name="created_at" value="{{ image.created_at }}"/>
@@ -62,7 +66,7 @@
 					</div>
 					<div class="form-group">
 						<label>Filter</label>
-						<select name="filter" class="custom-select" required>
+						<select id="filter-select" name="filter" class="custom-select" required>
 							<option value="_1977">1977</option>
 							<option value="aden">Aden</option>
 							<option value="amaro">Amaro</option>

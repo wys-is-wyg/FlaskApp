@@ -11,7 +11,7 @@ def images():
     images = []
     try:
         image_model = Image()
-        images = image_model.get_images(10000)
+        images = image_model.get_images()
     except Exception as err:
         error = err
     if error:
@@ -32,7 +32,7 @@ def my_images():
     if error:
         flash(str(error))
 
-    return render_template('images/images.html', images=images, title="My Images")
+    return render_template('images/my-images.html', images=images, title="My Images")
    
 @bp.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -41,8 +41,9 @@ def upload():
         error = None
         try:
             image_model = Image()
-            image = image_model.upload(request)
+            image_id = image_model.upload(request)
             flash("This image has been uploaded")
+            return redirect(url_for('images.edit', image_id=image_id))
         except Exception as err:
             error = err
         if error:
@@ -106,4 +107,4 @@ def delete(image_id):
     else:
         flash('This image has been deleted')
 
-    return redirect(url_for('images.images'))
+    return redirect(url_for('images.my_images'))

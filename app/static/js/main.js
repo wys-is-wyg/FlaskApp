@@ -17,7 +17,14 @@ $(document).ready(function(){
 		$('.modal').modal('show');
 	});
 
-	$('i.like').bind('click', function(e) {
+	
+	$('#filter-select').change(function(e) {
+		var new_filter = 'filter-' + this.value;
+		$('#image figure').removeClass();
+		$('#image figure').addClass(new_filter);
+	});
+
+	$('i.like').click(function(e) {
 		
 		e.stopPropagation();
 		e.preventDefault();
@@ -33,15 +40,11 @@ $(document).ready(function(){
 			console.log(result);
 			if (result) {
 				if (like) {
-					_this.removeClass('far');
-					_this.removeClass('not-liked');
-					_this.addClass('fas');
-					_this.addClass('liked');
+					_this.removeClass('far not-liked');
+					_this.addClass('fas liked');
 				} else {
-					_this.removeClass('fas');
-					_this.removeClass('liked');
-					_this.addClass('far');
-					_this.addClass('not-liked');
+					_this.removeClass('fas liked');
+					_this.addClass('far not-liked');
 				}
 			}
 		});

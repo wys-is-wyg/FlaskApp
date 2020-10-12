@@ -244,8 +244,9 @@ li.nav-item {
 }
 
 #upload #image {
-  width: 100%;
-  margin-bottom: 15px;
+  width: 140%;
+  margin-bottom: 30px;
+  margin-left: -20%;
 }
 
 #upload #image img {

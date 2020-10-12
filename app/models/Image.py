@@ -46,24 +46,6 @@ class Image():
         else:
             return images
 
-    def get_tag_images(self, tag, limit=20):
-        
-        error = None
-        images = False
-        
-        try:
-            database = Database()
-            images = database.get_tag_images(tag, limit)
-
-        except Exception as err:
-            flask_app.logger.info(err)
-            error = err
-
-        if error:
-            raise Exception(error)
-        else:
-            return images
-
     def get_image(self, image_id):
         
         error = None
@@ -120,7 +102,8 @@ class Image():
             return images
 
     def upload(self, request):
-        
+
+        image_id        = str(uuid.uuid1())
         name            = request.form['name']
         description     = request.form['description']
         category        = request.form['category']
@@ -154,7 +137,6 @@ class Image():
             else:
                 try:
                     uploader = Upload()
-                    image_id = str(uuid.uuid1())
                     upload_location = uploader.upload(file, image_id)
                     image_data = {
                         "id":                   image_id,
@@ -166,7 +148,7 @@ class Image():
                         "description":          description,
                         "category":             category,
                         "filter":               image_filter,
-                        "created_at":           time.time()
+                        "created_at":           int(time.time())
                     }
                     database = Database()
                     uploaded = database.save_image(image_data, image_id)
@@ -177,7 +159,7 @@ class Image():
             flask_app.logger.info(error)
             raise Exception(error)
         else:
-            return
+            return image_id
 
     def update(self, image_id, request):
         

@@ -41,6 +41,7 @@ class Database():
 
     # Image Requests
     def get_images(self, limit=20, user_id=False):
+        
         try:
             if (user_id):
                 images = self.db.child("images").order_by_child("user_id").equal_to(user_id).limit_to_first(limit).get()
@@ -75,7 +76,7 @@ class Database():
         image = False
         
         try:
-            image = self.db.child("images").child(image_id).get().val()
+            image = self.db.child("images").child(image_id).get()
 
         except Exception as err:
             flask_app.logger.info(err)
@@ -94,7 +95,6 @@ class Database():
 
     def delete_image(self, image_id):
         try:
-            image = self.get_image(image_id).val()
             self.db.child("images").child(image_id).remove()
         except Exception as err:
             self.process_error(err)

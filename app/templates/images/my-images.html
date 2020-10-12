@@ -21,7 +21,9 @@
 					{% for image_object in images.each() %}
 						{% with image = image_object.val() %}
 						<div class="grid-item">
-							<img src="{{ image.upload_location }}" alt="{{ image.description }}">
+							<figure class="filter-{{ image.filter }}">
+								<img src="{{ image.upload_location }}" alt="{{ image.description }}" class="{{ image.filter }}">
+							</figure>
 							<div class="info">
 								<h5>
 									{{ image.name }} 
