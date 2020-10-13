@@ -234,9 +234,6 @@ li.nav-item {
 
 #images .info i.like {
   z-index: 2;
-}
-
-#images h5 a {
   float: right;
   display: inline;
   color: #fff;

@@ -29,25 +29,29 @@ $(document).ready(function(){
 		e.stopPropagation();
 		e.preventDefault();
 
-		var like 		= $(this).hasClass('not-liked');
+		var like 		= $(this).hasClass('far');
 		var image_id 	= $(this).data('image');
 		var _this 		= $(this);
 
-		$.getJSON($SCRIPT_ROOT + '/like', {
-			like: like,
-			image_id: image_id
-		}, function(result) {
-			console.log(result);
-			if (result) {
-				if (like) {
-					_this.removeClass('far not-liked');
-					_this.addClass('fas liked');
-				} else {
-					_this.removeClass('fas liked');
-					_this.addClass('far not-liked');
+		$.getJSON(
+			$SCRIPT_ROOT + '/like', 
+			{
+				like: like,
+				image_id: image_id
+			}, 
+			function(result) {
+				console.log(result);
+				if (result) {
+					if (like) {
+						_this.removeClass('far');
+						_this.addClass('fas');
+					} else {
+						_this.removeClass('fas');
+						_this.addClass('far');
+					}
 				}
 			}
-		});
+		);
 		return false;
 	});
 

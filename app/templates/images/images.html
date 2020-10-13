@@ -16,8 +16,8 @@
 				{% endif %}
 				{% endwith %}
 				{% if images %}
-				{% set liked_class = 'liked fas fa-heart' %}
-				{% set not_liked_class = 'not-liked far fa-heart' %}
+				{% set liked = 'fas' %}
+				{% set not_liked = 'far' %}
 				{% set likes = session['user']['likes'] %}
 					<div class="grid">
 					{% for image_object in images.each() %}
@@ -33,9 +33,7 @@
 								<div class="col-10 pr-0">
 									<h5>
 										{{ image.name }} 
-										<a href="/images/like/{{ image.id }}">
-											<i class="like {{ liked_class if image.id in likes else not_liked_class }}" data-image="{{ image.id }}"></i>
-										</a>
+										<i class="like fa-heart {{ liked if image.id in likes else not_liked }}" data-image="{{ image.id }}"></i>
 									</h5>
 									<p>{{ image.description }}</p>
 									<small>{{ image.user_name }}</small>
