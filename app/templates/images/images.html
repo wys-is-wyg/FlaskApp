@@ -22,7 +22,7 @@
 					<div class="grid">
 					{% for image_object in images.each() %}
 						{% with image = image_object.val() %}
-						<div class="grid-item">
+						<div class="grid-item" data-image='{{ image|tojson }}'>
 							<figure class="filter-{{ image.filter }}">
 								<img src="{{ image.upload_location }}" alt="{{ image.description }}">
 							</figure>
