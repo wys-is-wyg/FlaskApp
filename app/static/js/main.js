@@ -15,6 +15,7 @@ $(document).ready(function(){
 	$('.grid-item figure').click(function(){
 		//Fetch image data
 		var image_data = $(this).closest('.grid-item').data(image);
+
 		var image = image_data.image;
 
 		//Build HTML from image data
@@ -28,6 +29,16 @@ $(document).ready(function(){
 	});
 
 	
+	if ($('#filter-select').length > 0 ) {
+		var filter = $('#filter-select').data('filter');
+		$('#filter-select').val(filter);
+	}
+
+	if ($('#category').length > 0 ) {
+		var filter = $('#category').data('category');
+		$('#category').val(filter);
+	}
+
 	$('#filter-select').change(function(e) {
 		var new_filter = 'filter-' + this.value;
 		$('#image figure').removeClass();
@@ -50,7 +61,6 @@ $(document).ready(function(){
 				image_id: image_id
 			}, 
 			function(result) {
-				console.log(result);
 				if (result) {
 					if (like) {
 						_this.removeClass('far');

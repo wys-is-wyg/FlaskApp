@@ -1,7 +1,7 @@
 
     {% extends "base.html" %}
     {% block main %}
-    <div id="images" class="container-fluid">
+    <div id="images" class="container-fluid my-images">
 		<div class="row">
 			<div class="col">
 				<h2>{{ title }}</h2>
@@ -20,7 +20,7 @@
 					<div class="grid">
 					{% for image_object in images.each() %}
 						{% with image = image_object.val() %}
-						<div class="grid-item">
+						<div class="grid-item"  data-image='{{ image|tojson }}'>
 							<figure class="filter-{{ image.filter }}">
 								<img src="{{ image.upload_location }}" alt="{{ image.description }}" class="{{ image.filter }}">
 							</figure>
